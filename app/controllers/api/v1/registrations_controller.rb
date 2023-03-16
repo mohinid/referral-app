@@ -10,9 +10,7 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
         }, status: :ok
       else
         render json: {
-          messages: "Sign Up Failed!",
-          is_success: false,
-          data: {}
+          messages: "Sign Up Failed!"
         }, status: :unprocessable_entity
       end
     end
@@ -26,7 +24,6 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
       return if params[:user].present?
       render json: {
           messages: "Missing Params."
-          data: {}
         }, status: :bad_request
     end
   end
