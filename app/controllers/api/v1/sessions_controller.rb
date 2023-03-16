@@ -6,15 +6,11 @@ class Api::V1::SessionsController < Devise::SessionsController
     if @user.valid_password?(sign_in_params[:password])
       sign_in "user", @user
       render json: {
-        messages: "Signed In Successfully!",
-        is_success: true,
-        data: {user: @user}
+        messages: "Signed In Successfully!"
       }, status: :ok
     else
       render json: {
-        messages: "Sign-in Failed.",
-        is_success: false,
-        data: {}
+        messages: "Sign-in Failed."
       }, status: :unauthorized
     end
   end
@@ -30,9 +26,7 @@ class Api::V1::SessionsController < Devise::SessionsController
       return @user
     else
       render json: {
-        messages: "Cannot find User.",
-        is_success: false,
-        data: {}
+        messages: "Cannot find User- #{sign_in_params[:email]}"
       }, status: :not_found
     end
   end

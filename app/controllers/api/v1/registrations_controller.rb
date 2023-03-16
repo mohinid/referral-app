@@ -6,9 +6,7 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
       user = User.new user_params
       if user.save
         render json: {
-          messages: "Sign Up Successful!",
-          is_success: true,
-          data: {user: user}
+          messages: "Sign Up Successful!"
         }, status: :ok
       else
         render json: {
@@ -27,8 +25,7 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
     def ensure_params_exist
       return if params[:user].present?
       render json: {
-          messages: "Missing Params.",
-          is_success: false,
+          messages: "Missing Params."
           data: {}
         }, status: :bad_request
     end
