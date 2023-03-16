@@ -9,7 +9,7 @@
 
 # Versions to Use
 
-*Ruby version* - 3.0.1
-*Rails version* - 7.0.1
-*DB *- MySql
-*Authentication* - Devise
+- Ruby version: 3.0.1
+- Rails version: 7.0.1
+- DB: MySql
+- Authentication: Devise
