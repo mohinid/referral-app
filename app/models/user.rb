@@ -5,9 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   before_create :generate_referral_code
+  belongs_to :users, :class_name => 'User', foreign_key: 'referred_by', optional: true
   
   private
-
+  
     def generate_referral_code
       self.referral_code = SecureRandom.base58(10)
     end
