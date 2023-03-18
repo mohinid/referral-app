@@ -2,7 +2,7 @@
 
 # DirectShifts Assignment
 
-Developer Note: Given the ETA for this assessment,
+Developer Note: Given the ETA(2 days) for this assessment,
 I have implemented all features using Rails(API and UI) for now as I have not worked with React.
 
 1. Users should be able to Sign-Up/Login both via UI and via API call.
