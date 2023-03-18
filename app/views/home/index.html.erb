@@ -12,6 +12,9 @@
     <% end %>
 
     <h1> DirectShifts Referral App! </h1>
+
+    <%= link_to "Click on send new referral email", new_referral_path %>
+
     <h2>You referred below users:</h2>
     <% @referrals.each do |referral| %>
         <%= referral.email %><br/>

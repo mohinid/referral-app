@@ -4,8 +4,8 @@ Rails.application.routes.draw do
       }
 
   root "home#index"
-  resources :referrals, only: [:index]
-  
+  resources :referrals, only: [:index, :new, :create]
+
   namespace :api, defaults: {format: :json} do
     namespace :v1 do 
       devise_scope :user do
