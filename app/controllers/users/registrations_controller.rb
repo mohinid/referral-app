@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  
   def new 
-    @ref_id = referrer.id if (params[:referral_code].present? && referrer.present?)
+    @referred_by_id = referrer.id if (params[:referral_code].present? && referrer.present?)
     super
   end
 

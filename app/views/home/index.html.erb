@@ -16,8 +16,13 @@
     <%= link_to "Click on send new referral email", new_referral_path %>
 
     <h2>You referred below users:</h2>
+    <h3>Users with pending invite:</h3>
     <% @referrals.each do |referral| %>
         <%= referral.email %><br/>
+    <% end %>
+    <h3>Users who subscribed via your invite:</h3>
+    <% @referred_subscribers.each do |subscriber| %>
+        <%= subscriber.email %><br/>
     <% end %>
   </body>
 </html>

@@ -33,7 +33,8 @@ FileUtils.chdir APP_ROOT do
   puts "\n== Restarting application server =="
   system! "bin/rails restart"
 
-  puts "\n== Setup complete! 🎉 =="
+  puts "\n== 🎉 Setup complete! 🎉 =="
   puts "\n👉 Run \"rails s\" to start the development server."
   puts "\n👉 Run your application in browser with url -> 'http://localhost:3000'"
+  puts "\n👉 Login with already created test user -'test1@example.com'"
 end
