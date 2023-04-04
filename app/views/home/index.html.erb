@@ -4,25 +4,39 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <% if user_signed_in? %> 
-    <div> Welcome <%= current_user.email %> </div> 
-    <%= button_to "Sign out", destroy_user_session_path, method: :delete %> 
-    <% else %>
-    <%= button_to "Sign in", new_user_session_path %> 
-    <% end %>
+    <div class="header">
+      <% if user_signed_in? %> 
+      <div> Welcome <%= current_user.email %> </div> 
+      <%= button_to "Sign out", destroy_user_session_path, method: :delete %> 
+      <% else %>
+      <%= button_to "Sign in", new_user_session_path %> 
+      <% end %>
+    </div>
 
     <h1> DirectShifts Referral App! </h1>
-
     <%= link_to "Click on send new referral email", new_referral_path %>
 
     <h2>You referred below users:</h2>
     <h3>Users with pending invite:</h3>
-    <% @referrals.each do |referral| %>
-        <%= referral.email %><br/>
+    <%if @referrals.present? %>
+    <ul class="referral-list">
+      <% @referrals.each do |referral| %>
+          <li><%= referral.email %><br/></li>
+      <% end %> 
+    </ul>
+    <% else %>
+      <p> No referral emails sent yet! </p>
     <% end %>
+
     <h3>Users who subscribed via your invite:</h3>
-    <% @referred_subscribers.each do |subscriber| %>
-        <%= subscriber.email %><br/>
-    <% end %>
+    <%if @referrals.present? %>
+      <ul class="referral-list">
+      <% @referred_subscribers.each do |subscriber| %>
+          <li><%= subscriber.email %><br/></li>
+      <% end %>
+      </ul>
+    <% else %>
+      <p> No users have joined via your invite. </p>
+    <% end %>  
   </body>
 </html>

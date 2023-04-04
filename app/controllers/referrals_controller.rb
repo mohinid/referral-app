@@ -11,7 +11,7 @@ class ReferralsController < ApplicationController
   private
     def duplicate_email 
       if Referral.find_by(email: params[:email]) || User.find_by(email: params[:email])
-        flash.keep[:notice] = "Email '#{params[:email]}' already exists as a referred user or subscriber. Please use another email."
+        flash.keep[:alert] = "Email '#{params[:email]}' already exists as a referred user or subscriber. Please use another email."
       end
     end
 end
