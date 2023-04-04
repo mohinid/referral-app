@@ -1,33 +1,26 @@
 class Api::V1::SessionsController < Devise::SessionsController
-  before_action :sign_in_params, only: :create
-  before_action :load_user, only: :create
-
-  def create
-    if @user.valid_password?(sign_in_params[:password])
-      sign_in "user", @user
-      render json: {
-        messages: "Signed In Successfully!"
-      }, status: :ok
-    else
-      render json: {
-        messages: "Sign-in Failed."
-      }, status: :unauthorized
-    end
-  end
+  skip_before_action :verify_authenticity_token
+  before_action :authenticate_user_using_x_auth_token
 
   private
-  def sign_in_params
-    params.require(:user).permit :email, :password
-  end
-
-  def load_user
-    @user = User.find_for_database_authentication(email: sign_in_params[:email])
-    if @user
-      return @user
-    else
-      render json: {
-        messages: "Cannot find User- #{sign_in_params[:email]}"
-      }, status: :not_found
+    def sign_in_params
+      params.require(:user).permit :email, :token
     end
-  end
+
+    def authenticate_user_using_x_auth_token
+      user_email = request.headers["X-Auth-Email"].presence
+      auth_token = request.headers["X-Auth-Token"].presence
+      user = user_email && User.find_by(email: user_email)
+
+      if user && auth_token && Devise.secure_compare(user.authentication_token, auth_token)
+        sign_in user, store: false
+         render json: {
+          messages: "Sign In Successful."
+        }, status: :ok
+      else
+        render json: {
+          messages: "Sign Up Failed."
+        }, status: :unauthorized
+      end
+    end
 end

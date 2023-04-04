@@ -1,9 +1,8 @@
 class User < ApplicationRecord
-  acts_as_token_authenticatable
-
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_secure_token :authentication_token
   before_create :generate_referral_code
   after_create :update_referrals
   belongs_to :users, class_name: 'User', foreign_key: 'referred_by', optional: true
