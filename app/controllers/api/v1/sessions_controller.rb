@@ -15,11 +15,11 @@ class Api::V1::SessionsController < Devise::SessionsController
       if user && auth_token && Devise.secure_compare(user.authentication_token, auth_token)
         sign_in user, store: false
          render json: {
-          messages: "Sign In Successful."
+          message: "Sign In Successful."
         }, status: :ok
       else
         render json: {
-          messages: "Sign Up Failed."
+          message: "Sign Up Failed."
         }, status: :unauthorized
       end
     end

@@ -45,6 +45,13 @@ gem "bootsnap", require: false
 gem "devise"
 gem "simple_token_authentication"
 
+# RSpec with factory
+gem 'rspec-rails'
+gem 'factory_bot_rails'
+gem 'shoulda-matchers'
+gem 'rails-controller-testing'
+gem 'faker'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 

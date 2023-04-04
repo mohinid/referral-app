@@ -2,22 +2,21 @@
 
 # DirectShifts ROR Assessment
 
-# Developer Note to Reviewer
-Given the ETA(2 days) for this assessment,
-I have implemented all features using Rails(API and UI) for now as I have not worked with React.
+# Message to Reviewer
+Due to time constraint, I have implemented all requested features using Rails, as I have not worked with React.
 # Problem Statement
 
 1. Create a Rails(3.0.1) + React project(7.0.1)
 
 2. Features:
 - Users should be able to Sign-Up/Login both via UI and via API call.
-- Users should be able to send referral link to any email address.
+- Users should be able to send Referral Link to any email address.
 - The referral email should contain a link that redirects to sign up page.
 - User’s home page should show all the email addresses that were referred.
 
 3. Authentication:
-- Use Devise to authenticate. The signup/login should happen using Material UI.
-- Make Devise work with APIs such that we can signup/login using APIs as well.
+- Use Devise to authenticate. The Sign-Up/Login should happen using Material UI.
+- Make Devise work with APIs such that we can Sign-Up/Login using APIs as well.
 
 4. Specifications:
 - Use MySQL for database
@@ -30,39 +29,63 @@ I have implemented all features using Rails(API and UI) for now as I have not wo
 # Implemented Features
 
 1. Created application with Rails 7 with MySql & Devise Authentication.
-2. Users are able to login/sign up via UI(using ERB views).
-3. Users can login from this url- http://localhost:3000/users/sign_in
-4. Users can sign Up from this url- http://localhost:3000/users/sign_up or by clicking sign up link from home page.
+
+2. Users are able to Login/Sign Up via UI(using ERB views).
+
+3. Users can Login from UI using this url- http://localhost:3000/users/sign_in
+
+4. Users can Sign Up from this url- http://localhost:3000/users/sign_up or by clicking sign up link from home page.
 <img width="565" alt="sign_up" src="https://user-images.githubusercontent.com/5313625/226101775-d0108498-44bb-4b17-8e0c-686f95ead4b0.png">
 
-5. A "referral_code" is generated for each user who signs up to the app. This code will be sent to the referred users via the sign up link.
-6. After logging in Users are directed to Home Page where they can see the list of users that the user had referred.
-7. A logged in user is redirected to referrals page by clicking- "Click on send new referral email" link on home page.
-8. On Referrals page, the user can enter any email and send link.
-<img width="400" alt="send_referral" src="https://user-images.githubusercontent.com/5313625/226101793-738a783a-34b5-471b-8790-93cf15ca9474.png">
+5. A *"referral_code"* is generated for each user who signs up to the app. This code will be sent to the referred users inside the Sign Up link.
 
-9. On successful email processing users will receive the link with the "referral_code" of the referee. For eg.- http://localhost:3000/users/sign_up?referral_code=1a5jNykLhf
-10. If a user signs up using this link, the "referred_by" column gets updated with the user who sent the email.(We can also verify this by using the same url and signing up manually. Once signed up the user is updated as the "referred user" and will be listed at the home page of the referee user).
-<img width="541" alt="list_referred_users" src="https://user-images.githubusercontent.com/5313625/226101781-03f71a17-f07e-44e0-bd25-c20456ffc594.png">
+6. After logging in Users are directed to Home Page where they can see: *"The list of Emails that the user have referred"* & *"The list of users who have Signed-Up to the app via his Referral Code."*
+
+7. A logged in user is redirected to referrals page by clicking- *"Click on send new referral email"* link on home page.
+
+8. On Referrals page, the user can enter any email to a user. Email field cant be blank.
+
+9. If the email already exists as a subscriber or in the referred users table, user will be shown an error message- *"Email ... already exists as a referred user or subscriber. Please use another email."* as shown below.
+
+10. On successful email processing users will receive the link with the *referral_code* of the referee. For eg.- http://localhost:3000/users/sign_up?referral_code=1a5jNykLhf. Also, User will shown a message - *"Email to ... sent and saved for reference!"*
+
+11. User can check the Email Preview on link - "http://localhost:3000/rails/mailers/referral_mailer/send_referral_email". Actual email service is not setup.
+
+12. We can also verify the referral feature by using the same link as shown in email preview by signing up manually. On successful sign up by the referred email, the referee user's home page list will be updated with his detail.
 
 # APIs
-User can Signup & Sign in via API using POST request.
+User can Sign Up & Sign In via API using POST requests.
 APIs end points are defined at "api/v1/sign_up" & "api/v1/sign_in"
 
-Request format:
+Request format for Sign Up:
 
 ```json
 {
  "user": {
   "email":"test@test.com",
   "password":"test123",
-  "password_confirmation": "test123"
+  "password_confirmation": "test123",
+  "referred_by_id": "1" /* optional */
  }
 }
 ```
 A sample response from Postman:
-<img width="1373" alt="postman- sign-up" src="https://user-images.githubusercontent.com/5313625/226101800-d4b58bb6-790f-4dc7-8a33-1dd3c677ad02.png">
 
+
+User can use his **"authentication_token"** received on sign up for Login. Request headers should contain 
+**'X-Auth-Email' & 'X-Auth-Token'**
+
+A sample response from Postman:
+
+# Tests
+
+RSpecs are implemented for all APIs, Controllers, Models & Mailer.
+You can run and check using command: ```bundle exec rspec```
+
+# Seed Data
+User1: 'test1@example.com' password: 'test123'
+User2: 'test2@example.com' password: 'test123', referred_by: User1
+Referred Email by User1: test@referral.com
 
 # Installation
 
@@ -90,12 +113,7 @@ rails s
 ```
 7. Navigate to [http://localhost:3000/users/sign_in](http://localhost:3000/users/sign_in)
 
-# Pending Features due to time constraints.
-1. Can add Specs - Unit tests as well as Integration.
-2. Sign up via actual Email link was not verified. Only verified via manually using the link.
-3. Currently user can see the list of all emails which signed-up using their referral-code. They don't see the pending invitations.
-4. Can add more Validations/Conditions.
-5. Integration with React.
+8. To Login, use existing email as shared in previous section of seed data or Sign up with your own user.
 
 # Contributors
-None. I did it myself! 😄
+None. I did it myself! 😄 Thanks for reading up.

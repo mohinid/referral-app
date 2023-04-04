@@ -5,7 +5,7 @@ class User < ApplicationRecord
   has_secure_token :authentication_token
   before_create :generate_referral_code
   after_create :update_referrals
-  belongs_to :users, class_name: 'User', foreign_key: 'referred_by', optional: true
+  belongs_to :referred_by, class_name: 'User', foreign_key: 'referred_by_id', optional: true
   has_many :referrals, dependent: :destroy
   
   private
