@@ -17,8 +17,15 @@ class ReferralsController < ApplicationController
       flash[:alert] = "Email '#{params[:email]}' already exists as a referred user or subscriber. Please use another email."
       return false
     end
-
-    ReferralMailer.with(user: current_user, email: params[:email]).referral_email.deliver_now
-    true
+    
+    # rescue failed email
+    begin
+      ReferralMailer.with(user: current_user, email: params[:email]).referral_email.deliver_now
+      true
+    rescue StandardError => e
+      logger.error "Error sending referral email: #{e.message}"
+      flash[:alert] = "Failed to send referral email, please try again later."
+      false
+    end
   end
 end
