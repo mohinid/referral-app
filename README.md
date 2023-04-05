@@ -3,7 +3,8 @@
 # DirectShifts ROR Assessment
 
 # Message to Reviewer
-Due to time constraint, I have implemented all requested features using Rails, as I have not worked with React.
+Due to time constraint, I have implemented all requested features using Rails(with basic SCSS styling for UI), as I have not worked with React.
+
 # Problem Statement
 
 1. Create a Rails(3.0.1) + React project(7.0.1)
@@ -33,38 +34,33 @@ Due to time constraint, I have implemented all requested features using Rails, a
 2. Users are able to Login/Sign Up via UI(using ERB views).
 
 3. Users can Login from UI using this url- http://localhost:3000/users/sign_in
+<img width="349" alt="Screenshot 2023-04-05 at 1 18 32 AM" src="https://user-images.githubusercontent.com/5313625/229904819-9b533b16-3bd8-413c-bc5f-e4f216c1b093.png">
 
 4. Users can Sign Up from this url- http://localhost:3000/users/sign_up or by clicking sign up link from home page.
 
 5. A *"referral_code"* is generated for each user who signs up to the app. This code will be sent to the referred users inside the Sign Up link.
 
 6. After logging in Users are directed to Home Page where they can see: 'The list of Emails that user have referred as'- **Emails with pending invite** & 'The list of users who have Signed-Up to the app via his Referral Code' as- **Users who subscribed via your invite** 
-
-<img width="859" alt="Screenshot 2023-04-04 at 9 54 09 PM" src="https://user-images.githubusercontent.com/5313625/229866606-4277840b-d2e9-401e-bad8-b3f00690bc40.png">
-
+<img width="1792" alt="Screenshot 2023-04-05 at 1 19 02 AM" src="https://user-images.githubusercontent.com/5313625/229904491-a02efce8-20f5-4e9d-9c25-5e67e0802f83.png">
 
 7. A logged in user is redirected to referrals page by clicking- *"Click on send new referral email"* link on home page.
 
 8. On Referrals page, the user can enter any email to a user. Email field cant be blank.
-
 <img width="695" alt="Screenshot 2023-04-04 at 9 54 40 PM" src="https://user-images.githubusercontent.com/5313625/229866633-0d7597a5-0f26-4079-a2ad-cf13ab66edc9.png">
 
-
 9. If the email already exists as a subscriber or in the referred users table, user will be shown an error message- *"Email ... already exists as a referred user or subscriber. Please use another email."* as shown below.
-
-<img width="651" alt="Screenshot 2023-04-04 at 9 56 30 PM" src="https://user-images.githubusercontent.com/5313625/229869475-67da6325-5e2a-41d2-b6ba-a8f1c7078271.png">
-
+<img width="812" alt="Screenshot 2023-04-05 at 1 19 38 AM" src="https://user-images.githubusercontent.com/5313625/229905718-a14a6588-0374-4ff4-9278-5f9b679d43f8.png">
 
 10. On successful email processing users will receive the link with the *referral_code* of the referee. For eg.- http://localhost:3000/users/sign_up?referral_code=1a5jNykLhf. Also, User will shown a message - *"Email to ... sent and saved for reference!"* as shown below.
-
-<img width="521" alt="Screenshot 2023-04-04 at 9 55 29 PM" src="https://user-images.githubusercontent.com/5313625/229869339-5a84188e-9109-401f-9555-1b41bcdd2b34.png">
-
+<img width="1156" alt="Screenshot 2023-04-05 at 1 20 10 AM" src="https://user-images.githubusercontent.com/5313625/229905763-a6c8fd95-e93a-4ce3-969c-2e4b483399c3.png">
 
 11. User can check the Email Preview on link - "http://localhost:3000/rails/mailers/referral_mailer/send_referral_email" since actual email service is not setup.
 
 <img width="1006" alt="Screenshot 2023-04-04 at 10 17 51 PM" src="https://user-images.githubusercontent.com/5313625/229866363-98a0ce6e-ba71-46d5-841c-a09a6254c230.png">
 
 12. We can also verify the referral feature by using the same link as shown in email preview by signing up manually. On successful sign up by the referred email, the referee user's home page list will be updated with his detail.
+
+13. Added simple SCSS styling.
 
 # APIs
 User can Sign Up & Sign In via API using POST requests.
@@ -98,6 +94,7 @@ A sample response from Postman:
 
 RSpecs are implemented for all APIs, Controllers, Models & Mailer.
 You can run and check using command: ```bundle exec rspec```
+<img width="724" alt="Screenshot 2023-04-05 at 1 30 51 AM" src="https://user-images.githubusercontent.com/5313625/229907022-e955f381-b055-46fe-8823-66d6805ae446.png">
 
 # Seed Data
 
@@ -127,6 +124,8 @@ Go to the referral-app directory. Run setup
 ```
 bin/setup
 ```
+<img width="875" alt="Screenshot 2023-04-05 at 1 29 26 AM" src="https://user-images.githubusercontent.com/5313625/229907137-7f2e3503-e0e9-46f1-b4fc-544b2ac5f78d.png">
+
 6. Start server
 ```
 rails s
