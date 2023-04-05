@@ -9,7 +9,6 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
       sign_up(resource_name, resource)
       render json: { message: "Sign Up Successful.", user: resource }, status: :created
     else
-      clean_up_passwords resource
       render json: { message: "Sign Up Failed", errors: resource.errors.full_messages }, status: :unprocessable_entity
     end
   end

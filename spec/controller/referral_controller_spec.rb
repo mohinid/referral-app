@@ -45,7 +45,7 @@ RSpec.describe ReferralsController, type: :controller do
       end
 
       it 'sets the flash notice' do
-        expect(flash[:notice]).to be_present
+        expect(flash[:alert]).to be_present
       end
     end
   end
